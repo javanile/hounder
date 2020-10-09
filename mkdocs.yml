@@ -1,0 +1,3 @@
+site_name: Hounder
+site_url: http://hounder.javanile.org
+theme: { name: readthedocs }

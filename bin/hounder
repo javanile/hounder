@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists(__DIR__.'/../../../autoload.php')) {
+    require __DIR__.'/../../../autoload.php';
+} else {
+    require __DIR__.'/../vendor/autoload.php';
+}
+
+use Javanile\Hounder\Application;
+use Javanile\Hounder\Commands\BuildCommand;
+use Javanile\Hounder\Commands\CheckCommand;
+use Javanile\Hounder\Commands\CleanCommand;
+use Javanile\Hounder\Commands\RunCommand;
+use Javanile\Hounder\Commands\StopCommand;
+use Javanile\Hounder\Output;
+
+$app = new Application(getcwd());
+
+$app->add(new BuildCommand);
+$app->add(new CheckCommand);
+$app->add(new CleanCommand);
+$app->add(new RunCommand);
+$app->add(new StopCommand);
+
+try {
+    $app->run(null, new Output);
+} catch (Exception $e) {
+    echo 'ERROR: '.$e->getMessage()."\n";
+    exit(1);
+}
